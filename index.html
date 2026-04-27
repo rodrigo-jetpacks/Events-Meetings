@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Meeting Briefs — Google Cloud Next '26</title>
+  <title>Meeting Briefs ‚Äî Jetpacks!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -61,6 +61,38 @@
       margin-top: 4px;
     }
 
+    /* ‚îÄ‚îÄ Tab Nav ‚îÄ‚îÄ */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .tab-btn {
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1.5px solid #E2E8F0;
+      background: transparent;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-light);
+      cursor: pointer;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab-btn.active {
+      background: var(--electric-violet);
+      border-color: var(--electric-violet);
+      color: white;
+    }
+
+    .tab-btn:not(.active):active {
+      background: #F1F5F9;
+    }
+
     .meeting-card {
       background: var(--pure-white);
       border-radius: var(--radius-card);
@@ -98,6 +130,8 @@
     .avatar.green  { background: linear-gradient(135deg, #10B981, #059669); }
     .avatar.violet { background: linear-gradient(135deg, #8B5CF6, #4F46E5); }
     .avatar.amber  { background: linear-gradient(135deg, #F59E0B, #EF4444); }
+    .avatar.teal   { background: linear-gradient(135deg, #14B8A6, #0891B2); }
+    .avatar.rose   { background: linear-gradient(135deg, #F43F5E, #EC4899); }
 
     .meeting-meta {
       flex: 1;
@@ -140,10 +174,12 @@
       white-space: nowrap;
     }
 
-    .badge-bucket { background: #EEF2FF; color: var(--electric-violet); }
-    .badge-country { background: #F1F5F9; color: var(--slate-dark); }
-    .badge-status-warm { background: #FEF3C7; color: #92400E; }
-    .badge-status-confirmed { background: #D1FAE5; color: #065F46; }
+    .badge-bucket          { background: #EEF2FF; color: var(--electric-violet); }
+    .badge-country         { background: #F1F5F9; color: var(--slate-dark); }
+    .badge-status-warm     { background: #FEF3C7; color: #92400E; }
+    .badge-status-confirmed{ background: #D1FAE5; color: #065F46; }
+    .badge-status-inbound  { background: #DBEAFE; color: #1E40AF; }
+    .badge-status-sent     { background: #F1F5F9; color: var(--slate-dark); }
 
     .chevron {
       color: var(--slate-light);
@@ -199,7 +235,7 @@
     .section ul li:last-child { border-bottom: none; }
 
     .section ul li::before {
-      content: '→';
+      content: '‚Üí';
       position: absolute;
       left: 0;
       color: var(--electric-violet);
@@ -221,6 +257,11 @@
     .highlight-box strong {
       font-style: normal;
       color: var(--electric-violet);
+    }
+
+    .highlight-box.green {
+      background: #D1FAE5;
+      color: #064E3B;
     }
 
     .angle-card {
@@ -266,6 +307,43 @@
       line-height: 1.5;
       margin-top: 8px;
     }
+
+    .opportunity-box {
+      background: #F0FDF4;
+      border-left: 3px solid var(--success);
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--slate-dark);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .chat-bubble {
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--slate-dark);
+    }
+
+    .chat-bubble.them {
+      background: #EEF2FF;
+      color: var(--deep-navy);
+    }
+
+    .chat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      margin-bottom: 5px;
+    }
+
+    .chat-label.them { color: var(--electric-violet); }
 
     .divider { height: 1px; background: #F1F5F9; margin: 0 20px; }
 
@@ -344,13 +422,8 @@
       -webkit-appearance: none;
     }
 
-    .notes-textarea:focus {
-      border-color: var(--electric-violet);
-    }
-
-    .notes-textarea::placeholder {
-      color: #CBD5E1;
-    }
+    .notes-textarea:focus { border-color: var(--electric-violet); }
+    .notes-textarea::placeholder { color: #CBD5E1; }
 
     .notes-saved {
       font-size: 11px;
@@ -363,13 +436,8 @@
 
     .notes-saved.show { opacity: 1; }
 
-    .notes-input-row {
-      position: relative;
-    }
-
-    .notes-input-row .notes-textarea {
-      padding-right: 50px;
-    }
+    .notes-input-row { position: relative; }
+    .notes-input-row .notes-textarea { padding-right: 50px; }
 
     .mic-btn {
       position: absolute;
@@ -398,7 +466,7 @@
 
     @keyframes pulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
-      50% { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+      50%       { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
     }
   </style>
 </head>
@@ -406,33 +474,41 @@
 
 <header>
   <div class="logo">Jetpacks!</div>
-  <h1>Google Cloud Next '26</h1>
-  <p>4 meetings · April 2026</p>
+  <h1 id="event-title">Google Cloud Next '26</h1>
+  <p id="event-subtitle">4 meetings ¬∑ April 2026</p>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('gcn')" id="tab-gcn">Google Cloud Next</button>
+    <button class="tab-btn" onclick="switchTab('sg')" id="tab-sg">Startup Grind</button>
+  </div>
 </header>
 
-<!-- ── MEETING 1: ANDREA LIAO ── -->
+
+<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+     GOOGLE CLOUD NEXT TAB
+‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<div id="gcn-content">
+
+<!-- ‚îÄ‚îÄ GCN 1: ANDREA LIAO ‚îÄ‚îÄ -->
 <div class="meeting-card" id="card-andrea">
   <div class="meeting-header" onclick="toggle('card-andrea')">
     <div class="avatar amber">AL</div>
     <div class="meeting-meta">
       <div class="meeting-name">Andrea Liao</div>
       <div class="meeting-role">Founder</div>
-      <div class="meeting-company">OpenGraph AI · USA</div>
+      <div class="meeting-company">OpenGraph AI ¬∑ USA</div>
       <div class="badge-row">
-        <span class="badge badge-bucket">Bucket 3 — AI Staffing</span>
+        <span class="badge badge-bucket">Bucket 3 ‚Äî AI Staffing</span>
         <span class="badge badge-status-confirmed">Meeting confirmed</span>
       </div>
     </div>
-    <div class="chevron">⌄</div>
+    <div class="chevron">‚åÑ</div>
   </div>
-
   <div class="meeting-body">
     <div class="section">
       <div class="section-label">What they do</div>
-      <p>Building "The Graph Intelligence For Multimodal AI Systems" — OpenGraph AI sits at the intersection of knowledge graphs and multimodal AI. The core idea: most AI systems today treat data as flat, disconnected text or images. OpenGraph adds a graph layer that captures relationships between entities, enabling richer reasoning across modalities (text, image, video, etc.).</p>
-      <div class="highlight-box">This is research-heavy, frontier-adjacent work. She's a founder, not a PM — she'll want to talk about the technical problem, not just the business.</div>
+      <p>Building "The Graph Intelligence For Multimodal AI Systems" ‚Äî OpenGraph AI sits at the intersection of knowledge graphs and multimodal AI. The core idea: most AI systems today treat data as flat, disconnected text or images. OpenGraph adds a graph layer that captures relationships between entities, enabling richer reasoning across modalities (text, image, video, etc.).</p>
+      <div class="highlight-box">This is research-heavy, frontier-adjacent work. She's a founder, not a PM ‚Äî she'll want to talk about the technical problem, not just the business.</div>
     </div>
-
     <div class="section">
       <div class="section-label">Likely tech stack</div>
       <div>
@@ -444,57 +520,52 @@
         <span class="stack-tag">Python</span>
       </div>
     </div>
-
     <div class="section">
       <div class="section-label">Questions to ask</div>
       <ul>
-        <li>What does the core product look like right now — research platform, API, something else?</li>
-        <li>Who are your early customers or use cases — is it mostly enterprise, or are you still in research/pilot stage?</li>
+        <li>What does the core product look like right now ‚Äî research platform, API, something else?</li>
+        <li>Who are your early customers or use cases ‚Äî is it mostly enterprise, or are you still in research/pilot stage?</li>
         <li>What kind of engineers are hardest to find for what you're building? GNN specialists? Multimodal ML?</li>
         <li>Are you building the team fully in-house, or open to contractors for specific parts of the stack?</li>
       </ul>
     </div>
-
     <div class="section">
       <div class="section-label">Your angle</div>
-      <p>Graph + multimodal is a niche intersection — the people who've worked on both are rare. Your pitch is access to engineers who've shipped production ML systems, not just researchers. If she needs someone to build infrastructure around a research breakthrough, that's the profile Jetpacks can find fast.</p>
-      <div class="watch-box">She's deep technical. Don't oversell — ask good questions and listen. The goal is to understand the specific engineering gap, then connect it to what Jetpacks actually delivers.</div>
+      <p>Graph + multimodal is a niche intersection ‚Äî the people who've worked on both are rare. Your pitch is access to engineers who've shipped production ML systems, not just researchers. If she needs someone to build infrastructure around a research breakthrough, that's the profile Jetpacks can find fast.</p>
+      <div class="watch-box">She's deep technical. Don't oversell ‚Äî ask good questions and listen. The goal is to understand the specific engineering gap, then connect it to what Jetpacks actually delivers.</div>
     </div>
     <div class="notes-section">
       <div class="section-label">My notes</div>
       <div class="notes-input-row">
-        <textarea class="notes-textarea" id="notes-andrea" placeholder="Add notes after the meeting…"></textarea>
-        <button class="mic-btn" id="mic-andrea" onclick="toggleMic('andrea')" title="Voice note">🎙</button>
+        <textarea class="notes-textarea" id="notes-andrea" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-andrea" onclick="toggleMic('andrea')" title="Voice note">üéô</button>
       </div>
-      <div class="notes-saved" id="saved-andrea">Saved ✓</div>
+      <div class="notes-saved" id="saved-andrea">Saved ‚úì</div>
     </div>
   </div>
 </div>
 
-
-<!-- ── MEETING 2: FARRY ARGOEBIE ── -->
+<!-- ‚îÄ‚îÄ GCN 2: FARRY ARGOEBIE ‚îÄ‚îÄ -->
 <div class="meeting-card open" id="card-farry">
   <div class="meeting-header" onclick="toggle('card-farry')">
     <div class="avatar blue">FA</div>
     <div class="meeting-meta">
       <div class="meeting-name">Farry Argoebie</div>
       <div class="meeting-role">CTO</div>
-      <div class="meeting-company">Terralogiq · Indonesia</div>
+      <div class="meeting-company">Terralogiq ¬∑ Indonesia</div>
       <div class="badge-row">
-        <span class="badge badge-bucket">Bucket 3 — AI Staffing</span>
+        <span class="badge badge-bucket">Bucket 3 ‚Äî AI Staffing</span>
         <span class="badge badge-status-confirmed">Meeting confirmed</span>
       </div>
     </div>
-    <div class="chevron">⌄</div>
+    <div class="chevron">‚åÑ</div>
   </div>
-
   <div class="meeting-body">
     <div class="section">
       <div class="section-label">What they do</div>
-      <p>Indonesia's only Google Maps Premier Partner + Google Cloud Premier Partner. ~60 people. Sell "hyper-local AI" — combining Vertex AI and Location Intelligence (Google Maps + CARTO) to logistics, retail, banking, and government enterprises across Indonesia. Won <strong>Rising Star Partner at JAPAC Google Maps Summit 2025</strong>. Actively pushing 2026 as their breakout year.</p>
-      <div class="highlight-box">"80% of all data has a location component, but only 10% is currently being used to power business decisions" — Farry's own quote. Use it as an opener.</div>
+      <p>Indonesia's only Google Maps Premier Partner + Google Cloud Premier Partner. ~60 people. Sell "hyper-local AI" ‚Äî combining Vertex AI and Location Intelligence (Google Maps + CARTO) to logistics, retail, banking, and government enterprises across Indonesia. Won <strong>Rising Star Partner at JAPAC Google Maps Summit 2025</strong>. Actively pushing 2026 as their breakout year.</p>
+      <div class="highlight-box">"80% of all data has a location component, but only 10% is currently being used to power business decisions" ‚Äî Farry's own quote. Use it as an opener.</div>
     </div>
-
     <div class="section">
       <div class="section-label">Tech stack</div>
       <div>
@@ -507,23 +578,20 @@
         <span class="stack-tag">CARTO</span>
       </div>
     </div>
-
     <div class="section">
       <div class="section-label">Questions to ask</div>
       <ul>
-        <li>You're pushing hard on hyper-local AI in 2026 — is your engineering team keeping up with the demand that's generating?</li>
+        <li>You're pushing hard on hyper-local AI in 2026 ‚Äî is your engineering team keeping up with the demand that's generating?</li>
         <li>Your stack is pretty specialized. Do you find that combination hard to hire for locally in Jakarta?</li>
         <li>Are you building solutions in-house for clients or more guiding implementations?</li>
-        <li>How are you thinking about capacity for the next 12 months — more client demand than you can currently deliver?</li>
+        <li>How are you thinking about capacity for the next 12 months ‚Äî more client demand than you can currently deliver?</li>
       </ul>
     </div>
-
     <div class="section">
       <div class="section-label">Your angle</div>
       <p>Their revenue depends on delivery capacity. Google is watching them closely after the Rising Star award. Tie your pitch to: <em>"helps you scale delivery without losing Google's confidence."</em></p>
-      <div class="watch-box">If he pushes back with "we hire internally" — reframe: no headcount, no onboarding lag, contractor ready in a week. You're a capacity solution, not a recruiter.</div>
+      <div class="watch-box">If he pushes back with "we hire internally" ‚Äî reframe: no headcount, no onboarding lag, contractor ready in a week. You're a capacity solution, not a recruiter.</div>
     </div>
-
     <div class="section">
       <div class="section-label">Listen for</div>
       <p>Specific projects they can't staff, or a gap between proposals won vs. engineers available. If he mentions it, ask: <em>"What role is the hardest to find right now?"</em></p>
@@ -531,144 +599,422 @@
     <div class="notes-section">
       <div class="section-label">My notes</div>
       <div class="notes-input-row">
-        <textarea class="notes-textarea" id="notes-farry" placeholder="Add notes after the meeting…"></textarea>
-        <button class="mic-btn" id="mic-farry" onclick="toggleMic('farry')" title="Voice note">🎙</button>
+        <textarea class="notes-textarea" id="notes-farry" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-farry" onclick="toggleMic('farry')" title="Voice note">üéô</button>
       </div>
-      <div class="notes-saved" id="saved-farry">Saved ✓</div>
+      <div class="notes-saved" id="saved-farry">Saved ‚úì</div>
     </div>
   </div>
 </div>
 
-
-<!-- ── MEETING 2: MICHAEL DEBOARD ── -->
+<!-- ‚îÄ‚îÄ GCN 3: MICHAEL DEBOARD ‚îÄ‚îÄ -->
 <div class="meeting-card" id="card-michael">
   <div class="meeting-header" onclick="toggle('card-michael')">
     <div class="avatar green">MD</div>
     <div class="meeting-meta">
       <div class="meeting-name">Michael DeBoard</div>
       <div class="meeting-role">CFO & Owner</div>
-      <div class="meeting-company">StrategyPlus Finance · San Jose, CA</div>
+      <div class="meeting-company">StrategyPlus Finance ¬∑ San Jose, CA</div>
       <div class="badge-row">
-        <span class="badge badge-bucket">Bucket 3 — AI Staffing</span>
+        <span class="badge badge-bucket">Bucket 3 ‚Äî AI Staffing</span>
         <span class="badge badge-status-confirmed">Meeting confirmed</span>
       </div>
     </div>
-    <div class="chevron">⌄</div>
+    <div class="chevron">‚åÑ</div>
   </div>
-
   <div class="meeting-body">
     <div class="section">
       <div class="section-label">Who he is</div>
-      <p>25 years in software + finance. Background: Deloitte → Moss Adams → Meta → VP Finance at MarketNation. CPA + MBA (MIT Sloan). Fractional CFO for VC/PE-backed startups from $0 to $50M+ ARR, angel to Series B. SaaS, AI, ecommerce. Currently building a "service-as-a-software" cloud product for automated finance. Also co-founder of a talent marketplace (StrategyPlus). Small team, 1-10 people.</p>
+      <p>25 years in software + finance. Background: Deloitte ‚Üí Moss Adams ‚Üí Meta ‚Üí VP Finance at MarketNation. CPA + MBA (MIT Sloan). Fractional CFO for VC/PE-backed startups from $0 to $50M+ ARR, angel to Series B. SaaS, AI, ecommerce. Currently building a "service-as-a-software" cloud product for automated finance. Also co-founder of a talent marketplace (StrategyPlus). Small team, 1-10 people.</p>
     </div>
-
     <div class="section">
-      <div class="section-label">Two angles — figure out which one first</div>
+      <div class="section-label">Two angles ‚Äî figure out which one first</div>
       <div class="angle-card">
-        <div class="angle-title">Angle 1 — He needs engineers to build his product</div>
+        <div class="angle-title">Angle 1 ‚Äî He needs engineers to build his product</div>
         <div class="angle-desc">He's building a cloud-based automated finance platform. Needs devs, probably not hiring full-time yet. Ask what the tech stack looks like and how far along the build is.</div>
       </div>
       <div class="angle-card">
-        <div class="angle-title">Angle 2 — He's a channel partner (higher leverage)</div>
+        <div class="angle-title">Angle 2 ‚Äî He's a channel partner (higher leverage)</div>
         <div class="angle-desc">He advises 10-20+ startups at any time. If his clients need to hire fast, he could refer them to Jetpacks. A fractional CFO who solves his portfolio's talent problem is very valuable.</div>
       </div>
     </div>
-
     <div class="section">
       <div class="section-label">Questions to ask</div>
       <ul>
         <li>Are you focused mainly on the StrategyPlus product right now or still split with advisory work?</li>
-        <li>What does the tech side of the platform look like — do you have a dev team?</li>
+        <li>What does the tech side of the platform look like ‚Äî do you have a dev team?</li>
         <li>Do the companies you advise tend to struggle more on the finance side or the engineering side when scaling?</li>
         <li>Have you found a good solution for your portfolio companies when they need to spin up engineering fast?</li>
       </ul>
     </div>
-
     <div class="section">
       <div class="section-label">Watch out</div>
-      <div class="watch-box">He's a finance guy who also built a talent marketplace — he'll ask about pricing directly. Don't dodge it. Fractional CFOs respect directness on numbers.</div>
+      <div class="watch-box">He's a finance guy who also built a talent marketplace ‚Äî he'll ask about pricing directly. Don't dodge it. Fractional CFOs respect directness on numbers.</div>
     </div>
     <div class="notes-section">
       <div class="section-label">My notes</div>
       <div class="notes-input-row">
-        <textarea class="notes-textarea" id="notes-michael" placeholder="Add notes after the meeting…"></textarea>
-        <button class="mic-btn" id="mic-michael" onclick="toggleMic('michael')" title="Voice note">🎙</button>
+        <textarea class="notes-textarea" id="notes-michael" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-michael" onclick="toggleMic('michael')" title="Voice note">üéô</button>
       </div>
-      <div class="notes-saved" id="saved-michael">Saved ✓</div>
+      <div class="notes-saved" id="saved-michael">Saved ‚úì</div>
     </div>
   </div>
 </div>
 
-
-<!-- ── MEETING 3: FRANCISCO CARLOS ── -->
+<!-- ‚îÄ‚îÄ GCN 4: FRANCISCO CARLOS ‚îÄ‚îÄ -->
 <div class="meeting-card" id="card-francisco">
   <div class="meeting-header" onclick="toggle('card-francisco')">
     <div class="avatar violet">FC</div>
     <div class="meeting-meta">
       <div class="meeting-name">Francisco Carlos</div>
       <div class="meeting-role">CEO & Co-Founder</div>
-      <div class="meeting-company">Generat IA · Mexico City</div>
+      <div class="meeting-company">Generat IA ¬∑ Mexico City</div>
       <div class="badge-row">
-        <span class="badge badge-bucket">Bucket 3 — AI Staffing</span>
+        <span class="badge badge-bucket">Bucket 3 ‚Äî AI Staffing</span>
         <span class="badge badge-status-warm">Interested, not confirmed</span>
       </div>
     </div>
-    <div class="chevron">⌄</div>
+    <div class="chevron">‚åÑ</div>
   </div>
-
   <div class="meeting-body">
     <div class="section">
       <div class="section-label">What they do</div>
-      <p>Mexico-based AI company building solutions for the financial sector in Latin America. SAP → SAP Fioneer → founded Generat IA. MBA from MIT Sloan. 25+ years in enterprise software. Partnership with DYCSI (major SAP Banking implementer) to drive AI adoption in financial services across the Americas. Not a scrappy startup — he knows how enterprise software gets built and sold.</p>
+      <p>Mexico-based AI company building solutions for the financial sector in Latin America. SAP ‚Üí SAP Fioneer ‚Üí founded Generat IA. MBA from MIT Sloan. 25+ years in enterprise software. Partnership with DYCSI (major SAP Banking implementer) to drive AI adoption in financial services across the Americas. Not a scrappy startup ‚Äî he knows how enterprise software gets built and sold.</p>
     </div>
-
     <div class="section">
       <div class="section-label">Why your message landed</div>
       <p>You led with "senior engineers from Latin America who have built production AI systems." He's building in Mexico, hiring in the same market. That framing was credible to someone who operates in the same talent pool and knows what good looks like.</p>
     </div>
-
     <div class="section">
       <div class="section-label">Questions to ask</div>
       <ul>
         <li>Is the product more of a platform or bespoke implementations for financial clients?</li>
         <li>With the DYCSI partnership, who handles the AI layer vs. the SAP integration?</li>
         <li>How big is your engineering team right now? Building most of it in Mexico?</li>
-        <li>Financial services AI requires people who've actually shipped in compliance-heavy environments — does that make hiring harder?</li>
+        <li>Financial services AI requires people who've actually shipped in compliance-heavy environments ‚Äî does that make hiring harder?</li>
       </ul>
     </div>
-
     <div class="section">
       <div class="section-label">Your angle</div>
-      <p>Financial services AI needs a very specific engineering profile — production experience, data sensitivity, compliance context. Not a generic ML engineer. If you've placed contractors in fintech, mention it. If not, lean on senior + LatAm + speed of placement.</p>
-      <div class="watch-box">He hasn't confirmed yet. Follow up in the app: "Great — what time works? Even 15 minutes is fine." Keep it casual.</div>
+      <p>Financial services AI needs a very specific engineering profile ‚Äî production experience, data sensitivity, compliance context. Not a generic ML engineer. If you've placed contractors in fintech, mention it. If not, lean on senior + LatAm + speed of placement.</p>
+      <div class="watch-box">He hasn't confirmed yet. Follow up in the app: "Great ‚Äî what time works? Even 15 minutes is fine." Keep it casual.</div>
     </div>
     <div class="notes-section">
       <div class="section-label">My notes</div>
       <div class="notes-input-row">
-        <textarea class="notes-textarea" id="notes-francisco" placeholder="Add notes after the meeting…"></textarea>
-        <button class="mic-btn" id="mic-francisco" onclick="toggleMic('francisco')" title="Voice note">🎙</button>
+        <textarea class="notes-textarea" id="notes-francisco" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-francisco" onclick="toggleMic('francisco')" title="Voice note">üéô</button>
       </div>
-      <div class="notes-saved" id="saved-francisco">Saved ✓</div>
+      <div class="notes-saved" id="saved-francisco">Saved ‚úì</div>
     </div>
   </div>
 </div>
 
-<div class="export-bar">
-  <button class="export-btn" onclick="exportNotes()">Copy all notes to clipboard</button>
+</div><!-- end #gcn-content -->
+
+
+<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+     STARTUP GRIND TAB
+‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<div id="sg-content" style="display:none">
+
+<!-- ‚îÄ‚îÄ SG 1: SERHII ZATSARYNIN ‚îÄ‚îÄ -->
+<div class="meeting-card" id="card-serhii">
+  <div class="meeting-header" onclick="toggle('card-serhii')">
+    <div class="avatar violet">SZ</div>
+    <div class="meeting-meta">
+      <div class="meeting-name">Serhii Zatsarynin</div>
+      <div class="meeting-role">CEO & Co-Founder</div>
+      <div class="meeting-company">ovul.ai</div>
+      <div class="badge-row">
+        <span class="badge badge-bucket">Femtech AI</span>
+        <span class="badge badge-status-sent">Outreach sent</span>
+      </div>
+    </div>
+    <div class="chevron">‚åÑ</div>
+  </div>
+  <div class="meeting-body">
+    <div class="section">
+      <div class="section-label">What they do</div>
+      <p>ovul.ai is a consumer-facing femtech AI product ‚Äî the name points squarely at ovulation and reproductive health tracking. They're building in one of the most technically underserved spaces in healthtech: the intersection of hormonal health data, ML prediction models, and consumer mobile. This isn't a simple tracker ‚Äî it's AI-driven cycle intelligence.</p>
+      <div class="highlight-box">Femtech AI is chronically underfunded and under-staffed. The engineers who've worked on health data ML at a consumer scale are genuinely rare ‚Äî that's exactly your pitch.</div>
+    </div>
+    <div class="section">
+      <div class="section-label">Likely tech stack</div>
+      <div>
+        <span class="stack-tag">React Native / Flutter</span>
+        <span class="stack-tag">Python / FastAPI</span>
+        <span class="stack-tag">ML cycle prediction</span>
+        <span class="stack-tag">Health data pipelines</span>
+        <span class="stack-tag">HIPAA-adjacent compliance</span>
+        <span class="stack-tag">Wearable integrations</span>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Your outreach</div>
+      <div class="chat-label">You said</div>
+      <div class="chat-bubble">"Hey Serhii, femtech AI is one of the most underserved spaces when it comes to technical talent. Building in healthcare AI with a consumer-facing product requires a very specific engineer. We work with early-stage health AI teams to staff quickly. Worth 20 minutes?"</div>
+      <div class="watch-box">No response recorded yet. If you see him at the event, the cold open is already warm ‚Äî reference your message and make it casual: "I sent you a note in the app, but honestly easier to just say hi in person."</div>
+    </div>
+    <div class="section">
+      <div class="section-label">Questions to ask</div>
+      <ul>
+        <li>Is the core product live? What does the current user experience look like?</li>
+        <li>What's the hardest engineering problem you're dealing with ‚Äî the ML layer, the mobile UX, or the health data compliance?</li>
+        <li>Are you building the team fully in-house, or open to contractors for specific technical pieces?</li>
+        <li>What does "a very specific engineer" mean to you in practice ‚Äî what's the profile you can never find?</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-label">Your angle</div>
+      <p>Health AI engineers who understand regulatory context (HIPAA, data sensitivity) AND can ship consumer-grade mobile products are a rare combo. Most ML engineers don't have the mobile chops. Most mobile engineers don't understand health data. Your network bridges that gap.</p>
+    </div>
+    <div class="notes-section">
+      <div class="section-label">My notes</div>
+      <div class="notes-input-row">
+        <textarea class="notes-textarea" id="notes-sg-serhii" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-sg-serhii" onclick="toggleMic('sg-serhii')" title="Voice note">üéô</button>
+      </div>
+      <div class="notes-saved" id="saved-sg-serhii">Saved ‚úì</div>
+    </div>
+  </div>
 </div>
 
-<div class="toast" id="toast">✓ Notes copied to clipboard</div>
+<!-- ‚îÄ‚îÄ SG 2: JOSE QUIROS ‚îÄ‚îÄ -->
+<div class="meeting-card open" id="card-jose">
+  <div class="meeting-header" onclick="toggle('card-jose')">
+    <div class="avatar blue">JQ</div>
+    <div class="meeting-meta">
+      <div class="meeting-name">Jose Quiros</div>
+      <div class="meeting-role">Founder</div>
+      <div class="meeting-company">Despix ¬∑ Costa Rica</div>
+      <div class="badge-row">
+        <span class="badge badge-bucket">B2B Hardware + AI</span>
+        <span class="badge badge-status-inbound">Inbound ‚Äî he reached out</span>
+      </div>
+    </div>
+    <div class="chevron">‚åÑ</div>
+  </div>
+  <div class="meeting-body">
+    <div class="section">
+      <div class="section-label">What they do</div>
+      <p>Despix is a B2B hardware + solutions company. Jose is exploring how to build a sales system powered by AI agents ‚Äî and he came to you because Jetpacks looks like "real execution," not just AI theory. He's a builder looking for someone who can help him think through architecture, not just sell him a SaaS tool.</p>
+      <div class="highlight-box green">He reached out to you. That's the highest signal possible. He's already sold on the concept ‚Äî the meeting is about scoping the opportunity.</div>
+    </div>
+    <div class="section">
+      <div class="section-label">What he said</div>
+      <div class="chat-label them">Jose wrote</div>
+      <div class="chat-bubble them">"Hi Rodrigo, I'm exploring how to structure a sales system powered by AI agents for a B2B hardware + solutions company. Your work at Jetpacks seems very aligned with real execution ‚Äî would love to exchange ideas if you're available during the conference."</div>
+    </div>
+    <div class="section">
+      <div class="section-label">Two scenarios to probe</div>
+      <div class="angle-card">
+        <div class="angle-title">Scenario A ‚Äî He needs engineers to build the AI sales system</div>
+        <div class="angle-desc">He has the vision but no technical team to execute it. He's looking for AI agent builders who understand B2B sales workflows, CRM integrations, and automation pipelines.</div>
+      </div>
+      <div class="angle-card">
+        <div class="angle-title">Scenario B ‚Äî He has engineers but wants to think it through</div>
+        <div class="angle-desc">He's looking for a strategic sounding board. The actual engagement might come later once he's more concrete about what to build. This meeting is relationship-building.</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Questions to ask</div>
+      <ul>
+        <li>When you say "AI agents for sales" ‚Äî are you thinking outreach automation, lead qualification, or something deeper in the sales process?</li>
+        <li>Do you have a technical co-founder or dev team already, or are you pre-build?</li>
+        <li>Is this for Despix internally, or building it as a product for other companies in your space?</li>
+        <li>What's the one part of your sales process that's most broken right now?</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-label">Your angle</div>
+      <p>AI agent builders who understand B2B sales context are a very specific profile ‚Äî not generic LLM developers. You can find engineers who've built agentic systems that connect to CRMs, scrape signals, and run outreach at scale. Frame it as: you don't just staff engineers, you match the problem to the right builder.</p>
+      <div class="opportunity-box">He said your work looks like "real execution." Lean into that. Ask what he's seen from others that felt too theoretical ‚Äî then contrast it with what Jetpacks actually delivers.</div>
+    </div>
+    <div class="notes-section">
+      <div class="section-label">My notes</div>
+      <div class="notes-input-row">
+        <textarea class="notes-textarea" id="notes-sg-jose" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-sg-jose" onclick="toggleMic('sg-jose')" title="Voice note">üéô</button>
+      </div>
+      <div class="notes-saved" id="saved-sg-jose">Saved ‚úì</div>
+    </div>
+  </div>
+</div>
+
+<!-- ‚îÄ‚îÄ SG 3: RORY BRENNER ‚îÄ‚îÄ -->
+<div class="meeting-card" id="card-rory">
+  <div class="meeting-header" onclick="toggle('card-rory')">
+    <div class="avatar amber">RB</div>
+    <div class="meeting-meta">
+      <div class="meeting-name">Rory Brenner</div>
+      <div class="meeting-role">Founder</div>
+      <div class="meeting-company">Perforated AI</div>
+      <div class="badge-row">
+        <span class="badge badge-bucket">ML Consulting</span>
+        <span class="badge badge-status-inbound">Inbound ‚Äî partner inquiry</span>
+      </div>
+    </div>
+    <div class="chevron">‚åÑ</div>
+  </div>
+  <div class="meeting-body">
+    <div class="section">
+      <div class="section-label">What they do</div>
+      <p>Perforated AI is an ML consulting and solutions firm. They do custom AI/ML work for clients ‚Äî PyTorch is central to their stack, which points to deep learning projects: computer vision, NLP, custom model training, or MLOps. They're growing and looking to expand their consultant partnerships, which is exactly why Rory reached out.</p>
+      <div class="highlight-box">This is not a staffing client ‚Äî this is a potential <strong>referral partner</strong>. Perforated AI gets overflow work they can't staff internally. If you become their go-to for PyTorch contractors, every client they can't serve becomes a warm lead for you.</div>
+    </div>
+    <div class="section">
+      <div class="section-label">What he said</div>
+      <div class="chat-label them">Rory wrote</div>
+      <div class="chat-bubble them">"Hey there, wondering if your teams do PyTorch projects. We're looking to expand our consultant partnerships."</div>
+    </div>
+    <div class="section">
+      <div class="section-label">Likely tech stack they work with</div>
+      <div>
+        <span class="stack-tag">PyTorch</span>
+        <span class="stack-tag">Computer Vision</span>
+        <span class="stack-tag">NLP / LLMs</span>
+        <span class="stack-tag">MLOps</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">CUDA / GPU training</span>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Questions to ask</div>
+      <ul>
+        <li>What kind of PyTorch work makes up most of your projects ‚Äî CV, NLP, custom model training, something else?</li>
+        <li>When you say consultant partnerships ‚Äî are you looking for contractors you can place with your clients, or collaborators on joint projects?</li>
+        <li>How often do you have to turn down or delay work because you don't have the right people available?</li>
+        <li>What's the profile of a PyTorch engineer that would actually fit your clients' expectations?</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-label">Your angle ‚Äî this is a partnership play</div>
+      <p>Don't pitch Jetpacks as if Perforated AI is a client. They already do what you do, partially ‚Äî but they have work they can't staff. The pitch is: <em>"When you win a project and don't have the right PyTorch engineer available, we can have someone to you in a week."</em></p>
+      <div class="opportunity-box">If this relationship works, Rory becomes a lead source. One good placement through Perforated AI could unlock a recurring referral channel. Prioritize building trust over closing a deal today.</div>
+    </div>
+    <div class="notes-section">
+      <div class="section-label">My notes</div>
+      <div class="notes-input-row">
+        <textarea class="notes-textarea" id="notes-sg-rory" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-sg-rory" onclick="toggleMic('sg-rory')" title="Voice note">üéô</button>
+      </div>
+      <div class="notes-saved" id="saved-sg-rory">Saved ‚úì</div>
+    </div>
+  </div>
+</div>
+
+<!-- ‚îÄ‚îÄ SG 4: WAFI SYED ‚îÄ‚îÄ -->
+<div class="meeting-card" id="card-wafi">
+  <div class="meeting-header" onclick="toggle('card-wafi')">
+    <div class="avatar teal">WS</div>
+    <div class="meeting-meta">
+      <div class="meeting-name">Wafi Syed</div>
+      <div class="meeting-role">Founder</div>
+      <div class="meeting-company">Audo ¬∑ Stealth</div>
+      <div class="badge-row">
+        <span class="badge badge-bucket">Early-stage / Stealth</span>
+        <span class="badge badge-status-confirmed">Meeting confirmed</span>
+      </div>
+    </div>
+    <div class="chevron">‚åÑ</div>
+  </div>
+  <div class="meeting-body">
+    <div class="section">
+      <div class="section-label">What we know</div>
+      <p>Almost nothing ‚Äî and that's useful context. Audo is a very new company, still in build mode, with essentially no online presence. The name sounds like audio but he clarified they're not in that space. They're early enough that there's nothing to Google. You're walking in genuinely blind on the product, which makes curiosity your best tool.</p>
+      <div class="highlight-box">The exchange that got you this meeting was great. He appreciated the honesty when you caught the mismatch ‚Äî that already built more trust than a perfect cold message would have.</div>
+    </div>
+    <div class="section">
+      <div class="section-label">How it went</div>
+      <div class="chat-label">You said</div>
+      <div class="chat-bubble">"Hey Wafi, audio AI is a technical niche that doesn't get the same talent pipeline as vision or NLP. Engineers who understand signal processing and ML together are genuinely rare. We help early-stage audio AI teams find them. Worth 20 minutes?"</div>
+      <div class="chat-label them" style="margin-top:10px">Wafi said</div>
+      <div class="chat-bubble them">"Hey Rodrigo. Appreciate the offer, but we don't work in the audio sector. Although our name might sound like it a bit."</div>
+      <div class="chat-label" style="margin-top:10px">You said</div>
+      <div class="chat-bubble">"And that's how you know that automated outreach is not perfect haha. I couldn't find a lot about Audo so you're probably in build mode still. If you're still open to it I would love to meet you in the event and learn more about what you're building."</div>
+      <div class="chat-label them" style="margin-top:10px">Wafi said</div>
+      <div class="chat-bubble them">"Haha no worries. Yeah we're pretty new so it makes sense if there's nothing about it online. Yeah sure, would love to meet you and talk."</div>
+    </div>
+    <div class="section">
+      <div class="section-label">Questions to ask</div>
+      <ul>
+        <li>Audo is a great name ‚Äî what made you land on it if it's not audio?</li>
+        <li>How early are you ‚Äî idea stage, prototype, first users?</li>
+        <li>What space are you actually in? What problem are you solving?</li>
+        <li>Are you building the tech yourself or do you have a technical co-founder?</li>
+        <li>What does the next 3 months look like for you ‚Äî what are you trying to get done?</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-label">Your angle</div>
+      <p>Don't pitch anything until you understand the product. This is a genuine discovery conversation. The goal is to learn what Audo is, assess if there's an engineering staffing opportunity, and leave him with a positive impression of Jetpacks. He already likes you ‚Äî don't ruin it by pitching too early.</p>
+      <div class="opportunity-box">Early-stage founders often become great clients 6-12 months later when they actually need to hire. Even if today's meeting isn't a deal, planting the seed is the win.</div>
+    </div>
+    <div class="notes-section">
+      <div class="section-label">My notes</div>
+      <div class="notes-input-row">
+        <textarea class="notes-textarea" id="notes-sg-wafi" placeholder="Add notes after the meeting‚Ä¶"></textarea>
+        <button class="mic-btn" id="mic-sg-wafi" onclick="toggleMic('sg-wafi')" title="Voice note">üéô</button>
+      </div>
+      <div class="notes-saved" id="saved-sg-wafi">Saved ‚úì</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end #sg-content -->
+
+
+<div class="export-bar">
+  <button class="export-btn" id="export-btn" onclick="exportNotes()">Copy all notes to clipboard</button>
+</div>
+
+<div class="toast" id="toast">‚úì Notes copied to clipboard</div>
 
 <script>
-  const LEADS = ['andrea', 'farry', 'michael', 'francisco'];
-  const NAMES = { andrea: 'Andrea Liao — OpenGraph AI', farry: 'Farry Argoebie — Terralogiq', michael: 'Michael DeBoard — StrategyPlus Finance', francisco: 'Francisco Carlos — Generat IA' };
+  // ‚îÄ‚îÄ Data ‚îÄ‚îÄ
+  const GCN_LEADS = ['andrea', 'farry', 'michael', 'francisco'];
+  const GCN_NAMES = {
+    andrea:    'Andrea Liao ‚Äî OpenGraph AI',
+    farry:     'Farry Argoebie ‚Äî Terralogiq',
+    michael:   'Michael DeBoard ‚Äî StrategyPlus Finance',
+    francisco: 'Francisco Carlos ‚Äî Generat IA'
+  };
 
-  // ── Toggle card open/close ──
+  const SG_LEADS = ['sg-serhii', 'sg-jose', 'sg-rory', 'sg-wafi'];
+  const SG_NAMES = {
+    'sg-serhii': 'Serhii Zatsarynin ‚Äî ovul.ai',
+    'sg-jose':   'Jose Quiros ‚Äî Despix',
+    'sg-rory':   'Rory Brenner ‚Äî Perforated AI',
+    'sg-wafi':   'Wafi Syed ‚Äî Audo'
+  };
+
+  let currentTab = 'gcn';
+
+  // ‚îÄ‚îÄ Tab switching ‚îÄ‚îÄ
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('gcn-content').style.display = tab === 'gcn' ? 'block' : 'none';
+    document.getElementById('sg-content').style.display  = tab === 'sg'  ? 'block' : 'none';
+    document.getElementById('tab-gcn').classList.toggle('active', tab === 'gcn');
+    document.getElementById('tab-sg').classList.toggle('active',  tab === 'sg');
+
+    if (tab === 'gcn') {
+      document.getElementById('event-title').textContent    = "Google Cloud Next '26";
+      document.getElementById('event-subtitle').textContent = '4 meetings ¬∑ April 2026';
+    } else {
+      document.getElementById('event-title').textContent    = 'Startup Grind';
+      document.getElementById('event-subtitle').textContent = '4 leads ¬∑ April 2026';
+    }
+  }
+
+  // ‚îÄ‚îÄ Toggle card open/close ‚îÄ‚îÄ
   function toggle(id) {
     document.getElementById(id).classList.toggle('open');
   }
 
-  // ── LocalStorage persistence ──
+  // ‚îÄ‚îÄ LocalStorage persistence ‚îÄ‚îÄ
   function saveNote(id) {
     const val = document.getElementById('notes-' + id).value;
     localStorage.setItem('note-' + id, val);
@@ -678,17 +1024,18 @@
   }
 
   function loadNotes() {
-    LEADS.forEach(id => {
+    const allLeads = [...GCN_LEADS, ...SG_LEADS];
+    allLeads.forEach(id => {
       const saved = localStorage.getItem('note-' + id);
       if (saved) document.getElementById('notes-' + id).value = saved;
       document.getElementById('notes-' + id).addEventListener('input', () => saveNote(id));
     });
   }
 
-  // ── Speech recognition ──
+  // ‚îÄ‚îÄ Speech recognition ‚îÄ‚îÄ
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   let activeRec = null;
-  let activeId = null;
+  let activeId  = null;
 
   function toggleMic(id) {
     if (!SpeechRecognition) {
@@ -698,13 +1045,11 @@
 
     const btn = document.getElementById('mic-' + id);
 
-    // Stop if already recording this card
     if (activeId === id && activeRec) {
       activeRec.stop();
       return;
     }
 
-    // Stop any other active recording
     if (activeRec) activeRec.stop();
 
     const rec = new SpeechRecognition();
@@ -714,31 +1059,30 @@
 
     const textarea = document.getElementById('notes-' + id);
     const base = textarea.value;
-    let interim = '';
 
     rec.onstart = () => {
       activeRec = rec;
-      activeId = id;
+      activeId  = id;
       btn.classList.add('recording');
-      btn.textContent = '⏹';
+      btn.textContent = '‚èπ';
     };
 
     rec.onresult = (e) => {
       let finalChunk = '';
-      interim = '';
+      let interim    = '';
       for (let i = e.resultIndex; i < e.results.length; i++) {
         if (e.results[i].isFinal) finalChunk += e.results[i][0].transcript;
         else interim += e.results[i][0].transcript;
       }
       if (finalChunk) textarea.value = (base + (base ? ' ' : '') + finalChunk).trimStart();
-      else textarea.value = (base + (base ? ' ' : '') + interim).trimStart();
+      else            textarea.value = (base + (base ? ' ' : '') + interim).trimStart();
     };
 
     rec.onend = () => {
       activeRec = null;
-      activeId = null;
+      activeId  = null;
       btn.classList.remove('recording');
-      btn.textContent = '🎙';
+      btn.textContent = 'üéô';
       textarea.value = textarea.value.trim();
       saveNote(id);
     };
@@ -746,49 +1090,49 @@
     rec.onerror = (e) => {
       console.error(e.error);
       btn.classList.remove('recording');
-      btn.textContent = '🎙';
+      btn.textContent = 'üéô';
     };
 
     rec.start();
   }
 
-  // ── Export all notes ──
+  // ‚îÄ‚îÄ Export notes (tab-aware) ‚îÄ‚îÄ
   function exportNotes() {
     const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    let output = `Google Cloud Next '26 — Meeting Notes\n${date}\n${'─'.repeat(40)}\n\n`;
+    const isGCN = currentTab === 'gcn';
+    const leads = isGCN ? GCN_LEADS : SG_LEADS;
+    const names = isGCN ? GCN_NAMES : SG_NAMES;
+    const event = isGCN ? "Google Cloud Next '26" : 'Startup Grind';
 
-    let hasAny = false;
-    LEADS.forEach(id => {
+    let output = `${event} ‚Äî Meeting Notes\n${date}\n${'‚îÄ'.repeat(40)}\n\n`;
+
+    leads.forEach(id => {
       const note = document.getElementById('notes-' + id).value.trim();
-      output += `${NAMES[id]}\n`;
-      if (note) {
-        output += `${note}\n`;
-        hasAny = true;
-      } else {
-        output += `(no notes yet)\n`;
-      }
+      output += `${names[id]}\n`;
+      output += note ? `${note}\n` : `(no notes yet)\n`;
       output += '\n';
     });
 
     navigator.clipboard.writeText(output.trim()).then(() => {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2200);
+      showToast();
     }).catch(() => {
-      // Fallback for browsers that block clipboard without HTTPS
       const ta = document.createElement('textarea');
       ta.value = output.trim();
       document.body.appendChild(ta);
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2200);
+      showToast();
     });
   }
 
-  // ── Init ──
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // ‚îÄ‚îÄ Init ‚îÄ‚îÄ
   loadNotes();
 </script>
 
